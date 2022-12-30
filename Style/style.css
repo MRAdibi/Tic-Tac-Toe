@@ -7,13 +7,14 @@
 
 
 body {
-    background-color: #2f3640;
+    background: url(../Img/Tic\ tac\ toe.jpg);
+    background-size: cover;
 }
 
 
 .click-box {
-    background-color: #dcdde1;
+    background-color: rgba(255, 255, 255, 0.582);
     padding: 55px;
-    border: solid 1px #000;
+    border: solid 1px rgba(0, 0, 0, 0.404);
     cursor: pointer;
 }
