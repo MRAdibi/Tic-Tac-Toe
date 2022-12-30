@@ -1,0 +1,19 @@
+/* Main setting for styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    background-color: #2f3640;
+}
+
+
+.click-box {
+    background-color: #dcdde1;
+    padding: 55px;
+    border: solid 1px #000;
+    cursor: pointer;
+}
