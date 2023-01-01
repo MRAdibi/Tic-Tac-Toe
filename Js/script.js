@@ -1,12 +1,7 @@
-let grid = [
-  [0, 0, 1],
-  [0, 0, 0],
-  [0, 0, 0],
-];
+const allEqual = (arr) =>
+  arr.every((v) => v === arr[0] && (v === "X" || v == "O"));
 
-const allEqual = (arr) => arr.every((v) => v === arr[0] && (v === 1 || v == 2));
-
-function checkWin() {
+function checkWin(grid) {
   // check diagnol
   let diags = [[], []];
   for (let i = 0; i < grid.length; i++) {
@@ -38,13 +33,33 @@ function checkWin() {
   console.log("no won");
   return false;
 }
-checkWin(grid);
-const event = new Event("grid-update");
 
-// Listen for the event.
-elem.addEventListener("grid-update", (e) => {
-  console.log("grid updated");
-});
+const { createApp } = Vue;
 
-// Dispatch the event.
-elem.dispatchEvent(event);
+createApp({
+  data() {
+    return {
+      turn: "X",
+      message: "Hello Vue!",
+      gameState: [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+      ],
+    };
+  },
+  methods: {
+    click(v) {
+      this.gameState[Math.ceil(v / 3) - 1][2 - (3 * Math.ceil(v / 3) - v)] =
+        this.turn;
+      if (checkWin(this.gameState)) {
+        this.gameState = [
+          ["", "", ""],
+          ["", "", ""],
+          ["", "", ""],
+        ];
+      }
+      this.turn === "X" ? (this.turn = "O") : (this.turn = "X");
+    },
+  },
+}).mount("#app");
