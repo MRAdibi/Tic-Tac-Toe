@@ -17,29 +17,29 @@
 
 
 
-    <div class="container">
+    <div id="app" class="container">
         <div class="d-flex flex-column justify-content-center">
-            <h2 class="text-center text-white mt-5">Hello World</h2>
+            <h2 class="text-center text-white mt-5">{{message}}</h2>
             <div class="mt-5" style="height: 300px;">
                 <div class="d-flex justify-content-center">
-                    <div class="row" style="width: 35%;">
-                        <div class="col-4 click-box" style="border-top-left-radius: 20px;"></div>
-                        <div class="col-4 click-box"></div>
-                        <div class="col-4 click-box" style="border-top-right-radius: 20px;"></div>
+                    <div id="row" class="row" style="width: 35%;">
+                        <div v-on:click="click(1)" class="col-4 click-box" style="border-top-left-radius: 20px;">{{gameState[0][0]}}</div>
+                        <div v-on:click="click(2)" class="col-4 click-box">{{gameState[0][1]}}</div>
+                        <div v-on:click="click(3)" class="col-4 click-box" style="border-top-right-radius: 20px;">{{gameState[0][2]}}</div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <div class="row" style="width: 35%;">
-                        <div class="col-4 click-box"></div>
-                        <div class="col-4 click-box"></div>
-                        <div class="col-4 click-box"></div>
+                    <div id="row" class="row" style="width: 35%;">
+                        <div v-on:click="click(4)" class="col-4 click-box">{{gameState[1][0]}}</div>
+                        <div v-on:click="click(5)" class="col-4 click-box">{{gameState[1][1]}}</div>
+                        <div v-on:click="click(6)" class="col-4 click-box">{{gameState[1][2]}}</div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <div class="row" style="width: 35%;">
-                        <div class="col-4 click-box" style="border-bottom-left-radius: 20px;"></div>
-                        <div class="col-4 click-box"></div>
-                        <div class="col-4 click-box" style="border-bottom-right-radius: 20px;"></div>
+                    <div id="row" class="row" style="width: 35%;">
+                        <div v-on:click="click(7)" class="col-4 click-box" style="border-bottom-left-radius: 20px;">{{gameState[2][0]}}</div>
+                        <div v-on:click="click(8)" class="col-4 click-box">{{gameState[2][1]}}</div>
+                        <div v-on:click="click(9)" class="col-4 click-box" style="border-bottom-right-radius: 20px;">{{gameState[2][2]}}</div>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+    <!-- ٰVuejs CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
     <!-- Main Script File -->
+
     <script src="Js/script.js"></script>
 </body>
 
