@@ -1,16 +1,17 @@
 const { createApp } = Vue;
-let state = [
-  ["", "", ""],
-  ["", "", ""],
-  ["", "", ""],
-];
+let counter = 0;
+let winner = "";
 
 createApp({
   data() {
     return {
       turn: "X",
-      message: "Hello Vue!",
-      gameState: state,
+      message: "Tic Tac Toe!",
+      gameState: [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""],
+      ],
     };
   },
   methods: {
@@ -24,20 +25,38 @@ createApp({
         this.turn === "X" ? (this.turn = "O") : (this.turn = "X");
       }
       if (checkWin(this.gameState)) {
-        console.log("a");
-        this.gameState = [
-          ["", "", ""],
-          ["", "", ""],
-          ["", "", ""],
-        ];
+        this.gameOver(winner);
+      } else if (counter === 9) {
+        this.gameOver(winner);
       }
+    },
+    gameOver() {
+      // reset states
+      this.turn = "X";
+      this.gameState = this.gameState.map((row) => row.map(() => ""));
     },
   },
 }).mount("#app");
 
-// check if all elements of an array are equal (to find if someone win)
-const allEqual = (arr) =>
-  arr.every((v) => v === arr[0] && (v === "X" || v == "O"));
+/**
+check if all elements of an array are equal (to find if some line win)
+ */
+const allEqual = (arr, callback) => {
+  arr.forEach((element) => {
+    if (element.every((v) => v === "X")) {
+      console.log("X won");
+      callback(true, "X");
+      return;
+    } else if (element.every((v) => v === "O")) {
+      console.log("O won");
+
+      callback(true, "O");
+      return;
+    }
+  });
+
+  return [false, ""];
+};
 
 function checkWin(grid) {
   // check diagnol
@@ -46,28 +65,35 @@ function checkWin(grid) {
     diags[0].push(grid[i][i]);
     diags[1].push(grid[i][2 - i]);
   }
-  if (allEqual(diags[0]) || allEqual(diags[1])) {
-    console.log("diagnols won");
-    return true;
-  }
+  allEqual([diags[0], diags[1]], (val, side) => {
+    if (val) {
+      winner = side;
+    }
+  });
 
   // check cols
   const arrayColumn = (arr, n) => arr.map((x) => x[n]);
   for (let i = 0; i < grid.length; i++) {
-    if (allEqual(arrayColumn(grid, i))) {
-      console.log("cols won");
-
-      return true;
-    }
+    allEqual([arrayColumn(grid, i)], (val, side) => {
+      if (val) {
+        winner = side;
+      }
+    });
   }
 
   // check rows
   for (let i = 0; i < grid.length; i++) {
-    if (allEqual(grid[i])) {
-      console.log("rows won");
-      return true;
-    }
+    allEqual([grid[i]], (val, side) => {
+      if (val) {
+        winner = side;
+      }
+    });
+  }
+
+  if (winner){
+    return true
   }
   console.log("no won");
+  counter++;
   return false;
 }
