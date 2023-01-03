@@ -23,6 +23,8 @@ createApp({
       if (this.gameState[row][col] === "") {
         this.gameState[row][col] = this.turn;
         this.turn === "x" ? (this.turn = "o") : (this.turn = "x");
+      } else {
+        return;
       }
       if (checkWin(this.gameState)) {
         this.gameOver(winner);
@@ -33,6 +35,7 @@ createApp({
     gameOver() {
       // reset states
       this.turn = "x";
+      winner = "";
       this.gameState = this.gameState.map((row) => row.map(() => ""));
     },
   },
@@ -47,10 +50,10 @@ const allEqual = (arr, callback) => {
       console.log("X won");
       callback(true, "x");
       return;
-    } else if (element.every((v) => v === "x")) {
+    } else if (element.every((v) => v === "o")) {
       console.log("O won");
 
-      callback(true, "x");
+      callback(true, "o");
       return;
     }
   });
@@ -90,8 +93,8 @@ function checkWin(grid) {
     });
   }
 
-  if (winner){
-    return true
+  if (winner) {
+    return true;
   }
   console.log("no won");
   counter++;
