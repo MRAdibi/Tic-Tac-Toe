@@ -23,23 +23,23 @@
             <div class="mt-5" style="height: 300px;">
                 <div class="d-flex justify-content-center">
                     <div id="row" class="row" style="width: 35%;">
-                        <div v-on:click="click(1)" class="col-4 click-box" style="border-top-left-radius: 20px;">{{gameState[0][0]}}</div>
-                        <div v-on:click="click(2)" class="col-4 click-box">{{gameState[0][1]}}</div>
-                        <div v-on:click="click(3)" class="col-4 click-box" style="border-top-right-radius: 20px;">{{gameState[0][2]}}</div>
+                        <div v-on:click="click(1)" class="col-4 click-box" :class="gameState[0][0]" style="border-top-left-radius: 20px;"></div>
+                        <div v-on:click="click(2)" class="col-4 click-box" :class="gameState[0][1]"></div>
+                        <div v-on:click="click(3)" class="col-4 click-box" :class="gameState[0][2]" style="border-top-right-radius: 20px;"></div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <div id="row" class="row" style="width: 35%;">
-                        <div v-on:click="click(4)" class="col-4 click-box">{{gameState[1][0]}}</div>
-                        <div v-on:click="click(5)" class="col-4 click-box">{{gameState[1][1]}}</div>
-                        <div v-on:click="click(6)" class="col-4 click-box">{{gameState[1][2]}}</div>
+                        <div v-on:click="click(4)" class="col-4 click-box" :class="gameState[1][0]"></div>
+                        <div v-on:click="click(5)" class="col-4 click-box" :class="gameState[1][1]"></div>
+                        <div v-on:click="click(6)" class="col-4 click-box" :class="gameState[1][2]"></div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <div id="row" class="row" style="width: 35%;">
-                        <div v-on:click="click(7)" class="col-4 click-box" style="border-bottom-left-radius: 20px;">{{gameState[2][0]}}</div>
-                        <div v-on:click="click(8)" class="col-4 click-box">{{gameState[2][1]}}</div>
-                        <div v-on:click="click(9)" class="col-4 click-box" style="border-bottom-right-radius: 20px;">{{gameState[2][2]}}</div>
+                        <div v-on:click="click(7)" class="col-4 click-box" :class="gameState[2][0]" style="border-bottom-left-radius: 20px;"></div>
+                        <div v-on:click="click(8)" class="col-4 click-box" :class="gameState[2][1]"></div>
+                        <div v-on:click="click(9)" class="col-4 click-box" :class="gameState[2][2]" style="border-bottom-right-radius: 20px;"></div>
                     </div>
                 </div>
             </div>

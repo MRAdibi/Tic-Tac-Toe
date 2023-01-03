@@ -5,7 +5,7 @@ let winner = "";
 createApp({
   data() {
     return {
-      turn: "X",
+      turn: "x",
       message: "Tic Tac Toe!",
       gameState: [
         ["", "", ""],
@@ -22,7 +22,7 @@ createApp({
 
       if (this.gameState[row][col] === "") {
         this.gameState[row][col] = this.turn;
-        this.turn === "X" ? (this.turn = "O") : (this.turn = "X");
+        this.turn === "x" ? (this.turn = "o") : (this.turn = "x");
       }
       if (checkWin(this.gameState)) {
         this.gameOver(winner);
@@ -32,7 +32,7 @@ createApp({
     },
     gameOver() {
       // reset states
-      this.turn = "X";
+      this.turn = "x";
       this.gameState = this.gameState.map((row) => row.map(() => ""));
     },
   },
@@ -43,14 +43,14 @@ check if all elements of an array are equal (to find if some line win)
  */
 const allEqual = (arr, callback) => {
   arr.forEach((element) => {
-    if (element.every((v) => v === "X")) {
+    if (element.every((v) => v === "x")) {
       console.log("X won");
-      callback(true, "X");
+      callback(true, "x");
       return;
-    } else if (element.every((v) => v === "O")) {
+    } else if (element.every((v) => v === "x")) {
       console.log("O won");
 
-      callback(true, "O");
+      callback(true, "x");
       return;
     }
   });

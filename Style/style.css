@@ -20,12 +20,12 @@ body {
 }
 
 /* this is for display X to the view */
-.display-x {
+.x {
     background: url(../Img/X.png);
     background-size: cover;
 }
 /* this is for display O to the view */
-.display-o {
+.o {
     background: url(../Img/O.png);
     background-size: cover;
 }
