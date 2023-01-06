@@ -1,61 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Botstrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
     <!-- Main Style File -->
-    <link rel="stylesheet" href="Style/style.css">
+    <link rel="stylesheet" type="text/css" href="./Style/style.css" />
     <title>Tic Tac Toe</title>
-</head>
+  </head>
 
-<body>
-
-
-
+  <body>
     <div id="app" class="container">
-        <div class="d-flex flex-column justify-content-center">
-            <h2 class="text-center text-white mt-5">Hey Now Is Your Turn <strong style="background-color: #2c3e50; padding: 0px 10px 2px 10px; border-radius: 50%;">{{turn}}</strong></h2>
-            <div class="mt-5" style="height: 300px;">
-                <div class="d-flex justify-content-center">
-                    <div id="row" class="row" style="width: 35%;">
-                        <div v-on:click="click(1)" class="col-4 click-box" :class="gameState[0][0]" style="border-top-left-radius: 20px;"></div>
-                        <div v-on:click="click(2)" class="col-4 click-box" :class="gameState[0][1]"></div>
-                        <div v-on:click="click(3)" class="col-4 click-box" :class="gameState[0][2]" style="border-top-right-radius: 20px;"></div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <div id="row" class="row" style="width: 35%;">
-                        <div v-on:click="click(4)" class="col-4 click-box" :class="gameState[1][0]"></div>
-                        <div v-on:click="click(5)" class="col-4 click-box" :class="gameState[1][1]"></div>
-                        <div v-on:click="click(6)" class="col-4 click-box" :class="gameState[1][2]"></div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <div id="row" class="row" style="width: 35%;">
-                        <div v-on:click="click(7)" class="col-4 click-box" :class="gameState[2][0]" style="border-bottom-left-radius: 20px;"></div>
-                        <div v-on:click="click(8)" class="col-4 click-box" :class="gameState[2][1]"></div>
-                        <div v-on:click="click(9)" class="col-4 click-box" :class="gameState[2][2]" style="border-bottom-right-radius: 20px;"></div>
-                    </div>
-                </div>
+      <div class="d-flex flex-column justify-content-center">
+        <h2 class="text-center text-white mt-5">
+          Hey Now Is Your Turn
+          <strong
+            style="
+              background-color: #2c3e50;
+              padding: 0px 10px 2px 10px;
+              border-radius: 50%;
+            "
+            >{{turn}}</strong
+          >
+        </h2>
+        <div class="mt-5" style="height: 300px">
+          <div class="d-flex justify-content-center">
+            <div id="row" class="row" style="width: 35%">
+              <div
+                v-on:click="click(1)"
+                class="col-4 click-box"
+                :class="gameState[0][0]"
+                style="border-top-left-radius: 20px"
+              ></div>
+              <div
+                v-on:click="click(2)"
+                class="col-4 click-box"
+                :class="gameState[0][1]"
+              ></div>
+              <div
+                v-on:click="click(3)"
+                class="col-4 click-box"
+                :class="gameState[0][2]"
+                style="border-top-right-radius: 20px"
+              ></div>
             </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div id="row" class="row" style="width: 35%">
+              <div
+                v-on:click="click(4)"
+                class="col-4 click-box"
+                :class="gameState[1][0]"
+              ></div>
+              <div
+                v-on:click="click(5)"
+                class="col-4 click-box"
+                :class="gameState[1][1]"
+              ></div>
+              <div
+                v-on:click="click(6)"
+                class="col-4 click-box"
+                :class="gameState[1][2]"
+              ></div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div id="row" class="row" style="width: 35%">
+              <div
+                v-on:click="click(7)"
+                class="col-4 click-box"
+                :class="gameState[2][0]"
+                style="border-bottom-left-radius: 20px"
+              ></div>
+              <div
+                v-on:click="click(8)"
+                class="col-4 click-box"
+                :class="gameState[2][1]"
+              ></div>
+              <div
+                v-on:click="click(9)"
+                class="col-4 click-box"
+                :class="gameState[2][2]"
+                style="border-bottom-right-radius: 20px"
+              ></div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Bootstrap CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
     <!-- ٰVuejs CDN -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
     <!-- Main Script File -->
 
     <script src="Js/script.js"></script>
-</body>
-
+  </body>
 </html>

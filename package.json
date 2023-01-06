@@ -1,0 +1,23 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "A Tic Tac Toe game using Vue Js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MRAdibi/Tic-Tac-Toe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MRAdibi/Tic-Tac-Toe/issues"
+  },
+  "homepage": "https://github.com/MRAdibi/Tic-Tac-Toe#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
