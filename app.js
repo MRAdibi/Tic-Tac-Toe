@@ -136,6 +136,7 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
           .emit("update game", { grid: game.grid, turn: game.turn });
       } else {
         console.log("already placed X or O");
+        return;
       }
       // if someone won or no one won terminate the game
       if (checkWin(game) || game.counter === 9) {
@@ -149,13 +150,11 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
           ["", "", ""],
         ];
         console.log(game.grid);
-        hubSocket
-          .to(game.id)
-          .emit("update game", {
-            grid: game.grid,
-            turn: game.turn,
-            counter: game.counter,
-          });
+        hubSocket.to(game.id).emit("update game", {
+          grid: game.grid,
+          turn: game.turn,
+          counter: game.counter,
+        });
       }
     } else if (!game) {
       socket.emit("play offline");
