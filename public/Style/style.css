@@ -7,15 +7,14 @@
 
 
 body {
-    background: url(../Img/Tic\ tac\ toe.jpg);
-    background-size: cover;
+    background-color: #2f3640;
 }
 
 
 .click-box {
     background-color: rgba(255, 255, 255, 0.582);
     padding: 55px 55px 100px 22px;
-    border: solid 1px rgba(0, 0, 0, 0.404);
+    border: solid 2px rgba(0, 0, 0, 0.404);
     cursor: pointer;
 }
 
@@ -24,8 +23,20 @@ body {
     background: url(../Img/X.png);
     background-size: cover;
 }
+
 /* this is for display O to the view */
 .o {
     background: url(../Img/O.png);
     background-size: cover;
+}
+
+
+.box-button {
+    width: 50%;
+    margin-inline: auto;
+    margin-top: 250px;
+    padding: 25px;
+    border: none;
+    border-radius: 15px;
+    background-color: #273c75;
 }

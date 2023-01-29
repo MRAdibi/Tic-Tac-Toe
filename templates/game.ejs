@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <%- include('partials/head'); %>
-  </head>
+</head>
 
 <body>
     <div id="app" class="container">
-      <button v-on:click="startOnline()">play online</button>
-      <button v-on:click="startOffline()">play offline</button>
+
 
         <div class="d-flex flex-column justify-content-center">
             <h2 class="text-center text-white mt-5">
                 Hey Now Is Your Turn
                 <strong style="
-              background-color: #2c3e50;
-              padding: 0px 10px 2px 10px;
+              color: #2d3436;
+              background-color: #dfe6e9;
+              padding: 0px 15px 7px 15px;
               border-radius: 50%;
             ">{{turn}}</strong>
             </h2>
@@ -46,10 +46,18 @@
                     </div>
                 </div>
             </div>
+            <div class="d-flex justify-content-around box-button">
+                <button v-on:click="startOnline()" class="btn" style="background-color: #c23616; color: #dfe6e9;">play
+                    online</button>
+                <button v-on:click="startOffline()" class="btn" style="background-color: #487eb0; color: #dfe6e9;">play
+                    offline</button>
+            </div>
         </div>
     </div>
 
+
     <%- include('partials/cdn'); %>
-    <script src="/Js/script.js"></script>
-  </body>
+        <script src="/Js/script.js"></script>
+</body>
+
 </html>
