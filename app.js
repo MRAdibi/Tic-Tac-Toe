@@ -88,7 +88,7 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
       playersInQueue.splice(playersInQueue.indexOf(selectedPlayer), 1);
 
       // assingning players random sides
-      playersClass = [new Player(selectedPlayer), new Player(currentPlayer)];
+      let playersClass = [new Player(selectedPlayer), new Player(currentPlayer)];
       playersClass[0].side = ["x", "o"][Math.floor(Math.random() * 2)];
       playersClass[1].side = playersClass[0].side === "o" ? "x" : "o";
 
@@ -108,9 +108,9 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
       console.log("players joined");
 
       // notify players that game found 
-      hubSocket
-      .to(game.id)
-      .emit("game found");
+      game.players.forEach(player=>{
+        player.socket.emit("game found",player.side)
+      })
 
       // starting the game by sending an update to players in the room
       hubSocket
