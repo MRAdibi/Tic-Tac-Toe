@@ -30,6 +30,15 @@ body {
     background-size: cover;
 }
 
+.title {
+    width: 50%;
+    margin-inline: auto;
+    color: #2d3436;
+    background-color: #dfe6e9;
+    border-radius: 12px;
+    padding: 10px 0px 10px 0px;
+}
+
 
 .box-button {
     width: 50%;
@@ -58,4 +67,3 @@ body {
     position: relative;
     left: -50%;
 }
-

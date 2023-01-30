@@ -1,122 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('partials/head'); %>
-  </head>
 
-  <body>
+<head>
+    <%- include('partials/head'); %>
+</head>
+
+<body>
     <div id="app" class="container">
-      <div class="d-flex flex-column justify-content-center">
-        <h2 class="text-center text-white mt-5">
-          <strong
-            style="
-              color: #2d3436;
-              background-color: #dfe6e9;
-              padding: 0px 15px 7px 15px;
-              border-radius: 50%;
-            "
-          >
-            <div v-if="side === ''">Tic Tac Toe</div>
-            <div v-else-if="turn === side">Hey Now Is Your Turn</div>
-            <div v-else>The opponent is choosing</div></strong
-          >
-        </h2>
-        <div class="mt-5" style="height: 300px">
-          <div class="d-flex justify-content-center">
-            <div id="row" class="row" style="width: 40%">
-              <div
-                v-on:click="click(1)"
-                class="col-4 click-box"
-                :class="gameState[0][0]"
-                style="border-top-left-radius: 20px"
-              ></div>
-              <div
-                v-on:click="click(2)"
-                class="col-4 click-box"
-                :class="gameState[0][1]"
-              ></div>
-              <div
-                v-on:click="click(3)"
-                class="col-4 click-box"
-                :class="gameState[0][2]"
-                style="border-top-right-radius: 20px"
-              ></div>
+        <div class="d-flex flex-column justify-content-center">
+            <h2 class="text-center text-white mt-5">
+                <strong>
+                    <div v-if="side === ''">Tic Tac Toe</div>
+                    <div class="title" v-else-if="turn === side">Hey Now Is Your Turn</div>
+                    <div class="title" v-else>The opponent is choosing</div>
+                </strong>
+            </h2>
+            <div class="mt-5" style="height: 300px">
+                <div class="d-flex justify-content-center">
+                    <div id="row" class="row" style="width: 40%">
+                        <div v-on:click="click(1)" class="col-4 click-box" :class="gameState[0][0]"
+                            style="border-top-left-radius: 20px"></div>
+                        <div v-on:click="click(2)" class="col-4 click-box" :class="gameState[0][1]"></div>
+                        <div v-on:click="click(3)" class="col-4 click-box" :class="gameState[0][2]"
+                            style="border-top-right-radius: 20px"></div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div id="row" class="row" style="width: 40%">
+                        <div v-on:click="click(4)" class="col-4 click-box" :class="gameState[1][0]"></div>
+                        <div v-on:click="click(5)" class="col-4 click-box" :class="gameState[1][1]"></div>
+                        <div v-on:click="click(6)" class="col-4 click-box" :class="gameState[1][2]"></div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div id="row" class="row" style="width: 40%">
+                        <div v-on:click="click(7)" class="col-4 click-box" :class="gameState[2][0]"
+                            style="border-bottom-left-radius: 20px"></div>
+                        <div v-on:click="click(8)" class="col-4 click-box" :class="gameState[2][1]"></div>
+                        <div v-on:click="click(9)" class="col-4 click-box" :class="gameState[2][2]"
+                            style="border-bottom-right-radius: 20px"></div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="d-flex justify-content-center">
-            <div id="row" class="row" style="width: 40%">
-              <div
-                v-on:click="click(4)"
-                class="col-4 click-box"
-                :class="gameState[1][0]"
-              ></div>
-              <div
-                v-on:click="click(5)"
-                class="col-4 click-box"
-                :class="gameState[1][1]"
-              ></div>
-              <div
-                v-on:click="click(6)"
-                class="col-4 click-box"
-                :class="gameState[1][2]"
-              ></div>
+            <div class="d-flex justify-content-around box-button">
+                <button v-on:click="startOnline()" class="btn" style="background-color: #c23616; color: #dfe6e9">
+                    play online
+                </button>
+                <button v-on:click="startOffline()" class="btn" style="background-color: #487eb0; color: #dfe6e9">
+                    play offline
+                </button>
             </div>
-          </div>
-          <div class="d-flex justify-content-center">
-            <div id="row" class="row" style="width: 40%">
-              <div
-                v-on:click="click(7)"
-                class="col-4 click-box"
-                :class="gameState[2][0]"
-                style="border-bottom-left-radius: 20px"
-              ></div>
-              <div
-                v-on:click="click(8)"
-                class="col-4 click-box"
-                :class="gameState[2][1]"
-              ></div>
-              <div
-                v-on:click="click(9)"
-                class="col-4 click-box"
-                :class="gameState[2][2]"
-                style="border-bottom-right-radius: 20px"
-              ></div>
-            </div>
-          </div>
         </div>
-        <div class="d-flex justify-content-around box-button">
-          <button
-            v-on:click="startOnline()"
-            class="btn"
-            style="background-color: #c23616; color: #dfe6e9"
-          >
-            play online
-          </button>
-          <button
-            v-on:click="startOffline()"
-            class="btn"
-            style="background-color: #487eb0; color: #dfe6e9"
-          >
-            play offline
-          </button>
-        </div>
-      </div>
     </div>
 
     <!-- notification box -->
     <div class="notification">
-      <div class="notif-content">
-        <div
-          class="alert alert-danger alert-dismissible fade show"
-          role="alert"
-        >
-          You are connected to the game!!!! Enjoy...
-          <button type="button" class="btn-close"></button>
+        <div class="notif-content">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                You are connected to the game!!!! Enjoy...
+                <button type="button" class="btn-close"></button>
+            </div>
         </div>
-      </div>
     </div>
 
     <%- include('partials/cdn'); %>
-    <script src="/Js/script.js"></script>
-  </body>
+        <script src="/Js/script.js"></script>
+</body>
+
 </html>
