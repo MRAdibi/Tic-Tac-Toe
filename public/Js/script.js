@@ -1,10 +1,12 @@
 const { createApp } = Vue;
 var socket = io("/socket");
+// notification box selected
+const notificationBox = document.querySelector('.notification');
 
 createApp({
   data() {
     return {
-      game:"",
+      game: "",
       turn: "x",
       message: "Tic Tac Toe!",
       gameState: [
@@ -26,7 +28,7 @@ createApp({
     });
 
 
-    socket.on("play offline",()=>{
+    socket.on("play offline", () => {
       alert("play offline")
     })
     socket.on("find players", function () {
@@ -34,9 +36,18 @@ createApp({
       socket.emit("match players");
     });
 
-    socket.on("game found",(gameId)=>{
-      console.log("game found",gameId)
+    socket.on("game found", (gameId) => {
+      console.log("game found", gameId)
       // notification alert here 
+      // add a event to close the notification box
+      document.querySelector('.btn-close').addEventListener('click', () => {
+        notificationBox.classList.toggle('notif-active')
+      })
+      // this time out is to remove the notification automatically
+      setTimeout(() => {
+        notificationBox.classList.remove("notif-active")
+      }, 5000)
+
       this.game = gameId
     })
 
@@ -57,9 +68,9 @@ createApp({
       socket.emit("update value", v);
     },
     startOnline() {
-      socket.emit("join game",localStorage.getItem("id"));
+      socket.emit("join game", localStorage.getItem("id"));
     },
-    startOffline() {},
+    startOffline() { },
     gameOver() {
       // reset states
       this.turn = "x";

@@ -40,3 +40,22 @@ body {
     border-radius: 15px;
     background-color: #273c75;
 }
+
+
+.notification {
+    position: absolute;
+    left: 50%;
+    top: -20%;
+    transition: 1s ease;
+}
+
+.notif-active {
+    top: 7%;
+    transition: 1s ease;
+}
+
+.notification .notif-content {
+    position: relative;
+    left: -50%;
+}
+
