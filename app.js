@@ -107,6 +107,11 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
 
       console.log("players joined");
 
+      // notify players that game found 
+      hubSocket
+      .to(game.id)
+      .emit("game found");
+
       // starting the game by sending an update to players in the room
       hubSocket
         .to(game.id)
