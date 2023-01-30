@@ -3,9 +3,24 @@ var socket = io("/socket");
 // notification box selected
 const notificationBox = document.querySelector(".notification");
 
+const notify = (message) => {
+  notificationBox.classList.add("notif-active");
+  // notification alert here
+  // add a event to close the notification box
+  document.querySelector(".btn-close").addEventListener("click", () => {
+    notificationBox.classList.remove("notif-active");
+  });
+  // this time out is to remove the notification automatically
+
+  setTimeout(() => {
+    notificationBox.classList.remove("notif-active");
+  }, 5000);
+};
+
 createApp({
   data() {
     return {
+      notificationMessage: "",
       turn: "x",
       side: "",
       message: "Tic Tac Toe!",
@@ -37,16 +52,9 @@ createApp({
 
     socket.on("game found", (playerside) => {
       console.log("game found");
-      // notification alert here
-      // add a event to close the notification box
-      notificationBox.classList.add("notif-active");
-      document.querySelector(".btn-close").addEventListener("click", () => {
-        notificationBox.classList.remove("notif-active");
-      });
-      // this time out is to remove the notification automatically
-      setTimeout(() => {
-        notificationBox.classList.remove("notif-active");
-      }, 5000);
+
+      notify("You are connected to the game!!!! Enjoy...");
+
       this.side = playerside;
     });
 
@@ -61,6 +69,8 @@ createApp({
       this.turn = data.turn;
       this.counter = data.counter;
     });
+
+    socket.on("game ended", (reason) => {});
   },
   methods: {
     click(v) {
