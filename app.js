@@ -90,8 +90,13 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
       // assingning players random sides
       playersClass = [new Player(selectedPlayer), new Player(currentPlayer)];
       playersClass[0].side = ["x", "o"][Math.floor(Math.random() * 2)];
-      playersClass[1].side = playersClass[0].side ? "x" : "o";
+      playersClass[1].side = playersClass[0].side === "o" ? "x" : "o";
 
+      console.log(
+        "give players random sides",
+        playersClass[0].side,
+        playersClass[1].side
+      );
       // creating game object
       var game = new Game(playersClass);
       games.push(game);
@@ -167,8 +172,9 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
 
     // remove the game
     games = games.filter((game) =>
-      game.players.filter((player) => player !== socket)
+      game.players.filter((player) => player.socket !== socket)
     );
+    console.log(games)
 
     console.log(playersInQueue.length);
     console.log("user disconnected");
