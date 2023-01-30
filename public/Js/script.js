@@ -40,8 +40,9 @@ createApp({
       console.log("game found", gameId)
       // notification alert here 
       // add a event to close the notification box
+      notificationBox.classList.add('notif-active')
       document.querySelector('.btn-close').addEventListener('click', () => {
-        notificationBox.classList.toggle('notif-active')
+        notificationBox.classList.remove('notif-active')
       })
       // this time out is to remove the notification automatically
       setTimeout(() => {
