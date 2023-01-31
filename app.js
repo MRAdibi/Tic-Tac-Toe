@@ -5,6 +5,7 @@ const io = require("socket.io")(http);
 const uuid = require("uuid");
 const checkWin = require("./public/Js/checkWin");
 const router = express.Router();
+const faker = require("@faker-js/faker");
 
 class Player {
   constructor(socket) {
@@ -37,10 +38,10 @@ let playersInQueue = [];
 let games = [];
 
 function getGame(socket) {
-  let mygame = games.filter((game) =>
-    game.players.filter((player) => player === socket)
+  const gameIndex = games.findIndex((game) =>
+    game.players.some((player) => player.socket === socket)
   );
-  return games.indexOf(mygame[0]);
+  return gameIndex;
 }
 
 app.set("view engine", "ejs");
@@ -88,7 +89,10 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
       playersInQueue.splice(playersInQueue.indexOf(selectedPlayer), 1);
 
       // assingning players random sides
-      let playersClass = [new Player(selectedPlayer), new Player(currentPlayer)];
+      let playersClass = [
+        new Player(selectedPlayer),
+        new Player(currentPlayer),
+      ];
       playersClass[0].side = ["x", "o"][Math.floor(Math.random() * 2)];
       playersClass[1].side = playersClass[0].side === "o" ? "x" : "o";
 
@@ -107,10 +111,12 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
 
       console.log("players joined");
 
-      // notify players that game found 
-      game.players.forEach(player=>{
-        player.socket.emit("game found",player.side)
-      })
+      const gameName = faker.faker.animal.cat();
+      // notify players that game found
+      game.players.forEach((player) => {
+        console.log("sockets ", player.socket.id);
+        player.socket.emit("game found", player.side, gameName);
+      });
 
       // starting the game by sending an update to players in the room
       hubSocket
@@ -124,7 +130,6 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
 
   socket.on("update value", (v) => {
     const game = games[getGame(socket)];
-
     if (game) {
       // translating event number to (row,col) form
       let row = Math.ceil(v / 3) - 1;
@@ -176,10 +181,12 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
     playersInQueue = playersInQueue.filter((item) => item.socket !== socket);
 
     // remove the game
-    games = games.filter((game) =>
-      game.players.filter((player) => player.socket !== socket)
-    );
-    console.log(games)
+    const gameIndex = getGame(socket);
+    if (gameIndex !== -1) games.splice(gameIndex, 1);
+
+    // send termination message to the game room players
+
+    console.log(games);
 
     console.log(playersInQueue.length);
     console.log("user disconnected");
