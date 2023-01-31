@@ -22,7 +22,7 @@ const notify = (message, type) => {
 createApp({
   data() {
     return {
-      notificationMessage: "",
+      gameName: "",
       turn: "x",
       side: "",
       message: "Tic Tac Toe!",
@@ -52,12 +52,13 @@ createApp({
       socket.emit("match players");
     });
 
-    socket.on("game found", (playerside) => {
+    socket.on("game found", (playerside, gamename) => {
       console.log("game found");
+      console.log(gamename)
 
       notify("You are connected to the game!!!! Enjoy...");
-
       this.side = playerside;
+      this.gameName = gamename;
     });
 
     socket.on("update game", (data) => {
