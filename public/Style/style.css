@@ -67,3 +67,20 @@ body {
     position: relative;
     left: -50%;
 }
+
+/* alert */
+.alert-custom {
+    color: #ecf0f1;
+}
+
+.alert-custom-success {
+    background-color: #27ae60;
+}
+
+.alert-custom-info {
+    background-color: #2980b9;
+}
+
+.alert-custom-error {
+    background-color: #c0392b;
+}

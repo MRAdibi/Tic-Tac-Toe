@@ -3,7 +3,9 @@ var socket = io("/socket");
 // notification box selected
 const notificationBox = document.querySelector(".notification");
 
-const notify = (message) => {
+const notify = (message, type) => {
+  notificationBox.querySelector('p').innerHTML = message;
+  // In this part, we need to get our alert type and send the appropriate class of that alert to the document
   notificationBox.classList.add("notif-active");
   // notification alert here
   // add a event to close the notification box
