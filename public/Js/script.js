@@ -1,10 +1,11 @@
 const { createApp } = Vue;
 var socket = io("/socket");
-// notification box selected
-const notificationBox = document.querySelector(".notification");
 
 const notify = (message, type) => {
-  notificationBox.querySelector('p').innerHTML = message;
+  // notification box selected
+  const notificationBox = document.querySelector(".notification");
+
+  notificationBox.querySelector("p").innerHTML = message;
   // In this part, we need to get our alert type and send the appropriate class of that alert to the document
   notificationBox.classList.add("notif-active");
   // notification alert here
@@ -12,16 +13,18 @@ const notify = (message, type) => {
   document.querySelector(".btn-close").addEventListener("click", () => {
     notificationBox.classList.remove("notif-active");
   });
-  // this time out is to remove the notification automatically
 
+  // this time out is to remove the notification automatically
   setTimeout(() => {
     notificationBox.classList.remove("notif-active");
   }, 5000);
 };
+Promise
 
 createApp({
   data() {
     return {
+      online: false,
       gameName: "",
       turn: "x",
       side: "",
@@ -54,7 +57,7 @@ createApp({
 
     socket.on("game found", (playerside, gamename) => {
       console.log("game found");
-      console.log(gamename)
+      console.log(gamename);
 
       notify("You are connected to the game!!!! Enjoy...");
       this.side = playerside;
@@ -77,12 +80,26 @@ createApp({
   },
   methods: {
     click(v) {
-      socket.emit("update value", v);
+      let row = Math.ceil(v / 3) - 1;
+      let col = 2 - (3 * Math.ceil(v / 3) - v);
+
+      if (this.online) {
+        socket.emit("update value", row, col);
+      } else {
+        // set the square
+        this.gameState[row][col] = this.turn;
+        // change the turn
+        this.turn === "x" ? (this.turn = "o") : (this.turn = "x");
+      }
     },
     startOnline() {
-      socket.emit("join game", localStorage.getItem("id"));
+      this.online = true;
+      socket.emit("join game");
     },
-    startOffline() {},
+    startOffline() {
+      // toggle game form
+      this.online === true ? (this.online = false) : (this.online = true);
+    },
     gameOver() {
       // reset states
       this.turn = "x";

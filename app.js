@@ -128,12 +128,10 @@ let hubSocket = io.of("/socket").on("connection", (socket) => {
     }
   });
 
-  socket.on("update value", (v) => {
+  socket.on("update value", (row,col) => {
     const game = games[getGame(socket)];
     if (game) {
-      // translating event number to (row,col) form
-      let row = Math.ceil(v / 3) - 1;
-      let col = 2 - (3 * Math.ceil(v / 3) - v);
+ 
       const player = game.players.filter(
         (player) => player.socket === socket
       )[0];
